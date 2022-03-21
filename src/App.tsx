@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import * as C from './App.styles';
+
 import {Item} from './types/item';
-import {Category} from './types/Category';
 import { categories } from './data/categories';
 import { items } from './data/item';
+
 import { getCurrentMonth, filterListByMonth } from './helpers/dateFilter';
+
 import { TableArea } from './components/TableArea';
 import { InfoArea } from './components/InfoArea';
 import { InputArea } from './components/InputArea';
@@ -16,60 +18,77 @@ const App = () => {
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   
-  
+
+  // Filtrar lista por mes
   useEffect(()=> {
     setFilteredList( filterListByMonth(list, currentMonth) );
   }, [list, currentMonth]);
 
+
+  // Calculo de Entrada y Salida en el valor de la lista
   useEffect(()=> {
     let incomeCount = 0;
     let expenseCount = 0;
 
     for (let i in filteredList) {
       if (categories[filteredList[i].category].expense) {
-        expenseCount += filteredList[i].value;
+        if(filteredList[i].valueCurrency >=1) {
+          expenseCount += (filteredList[i].value * filteredList[i].valueCurrency);
+        }else {
+          expenseCount += filteredList[i].value;
+        }
       } else {
-        incomeCount += filteredList[i].value;
+        if(filteredList[i].valueCurrency >=1){
+          incomeCount += (filteredList[i].value * filteredList[i].valueCurrency);
+        }else {
+          incomeCount += filteredList[i].value;
+        }
       }
     }
     setIncome(incomeCount);
     setExpense(expenseCount);
   }, [filteredList]);
 
-  const handleMonthChange = (newMonth: string) => {
-    setCurrentMonth(newMonth);
+
+  // handeler Para agregar un nuevo item a la lista
+  const handleAddItem = (item: Item) => {
+    setList([...list, item]);
+  }  
+
+  const handleDeleteItem = (deleteItem: string) => {
+    setList(list.filter((item)=> {
+      return item.coin != deleteItem
+    }))
   }
 
-  const handleAddItem = (item: Item) => {
-    let newList  = [...list];
-    newList.push(item);
-    setList(newList);
-  }
 
   return (
     <C.Container>
       <C.Header>
-        <C.HeaderText>Controle Financeiro</C.HeaderText>
+        <C.HeaderText>Beto Financiera</C.HeaderText>
       </C.Header>
       <C.Body>
 
 
-      {/* Área de informações */}
+      {/* Área de informacion */}
       <InfoArea
-      currentMonth={currentMonth} 
-      onMonthChange={handleMonthChange}
       income={income}
       expense={expense}
       />
 
       
-      {/* Inserir informações */}
-      <InputArea onAdd={handleAddItem}/>
+      {/* Insertar Informacion */}
+      <InputArea 
+        onAdd={handleAddItem}
+      />
 
 
         
-      {/* Tabela de itens */}
-      <TableArea list={filteredList}/>
+      {/* Tabla de items */}
+      <TableArea 
+        list={filteredList}
+        handleDeleteItem={handleDeleteItem}
+      />
 
 
       </C.Body>

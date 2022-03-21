@@ -4,24 +4,28 @@ import { TableItem } from '../TableItem';
 
 
 type Props = {
-    list: Item[]
+    list: Item[],
+    handleDeleteItem(deleteItem: string): void;
 }
 
-export const TableArea = ({list}: Props) => {
+export const TableArea = ({list, handleDeleteItem}: Props) => {
+   
+    
     return (
         <C.Table>
             <thead>
                 <tr>
-                    <C.TableHeadColumn width={100}>Data</C.TableHeadColumn>
+                    <C.TableHeadColumn width={100}>Fecha</C.TableHeadColumn>
                     <C.TableHeadColumn width={130}>Categoria</C.TableHeadColumn>
-                    <C.TableHeadColumn>Título</C.TableHeadColumn>
-                    <C.TableHeadColumn width={150}>Valor</C.TableHeadColumn>
+                    <C.TableHeadColumn width={130}>Moneda</C.TableHeadColumn>
+                    <C.TableHeadColumn width={150}>Valor Moneda $</C.TableHeadColumn>
+                    <C.TableHeadColumn width={150}>Cantidad $</C.TableHeadColumn>
+                    <C.TableHeadColumn width={150}>Valor Pesos $</C.TableHeadColumn>
                 </tr>
             </thead>
             <tbody>
                 {list.map((item, index)=>(
-                    <TableItem key={index} item={item}/>
-
+                    <TableItem key={index} item={item} handleDeleteItem={handleDeleteItem} />
                 ))}
             </tbody>
         </C.Table>

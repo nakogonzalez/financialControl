@@ -17,6 +17,7 @@ export const InputTitle = styled.div`
     font-weight: bold;
     margin-bottom: 5px;
 `;
+
 export const Input = styled.input`
     width: 100%;
     height: 30px;
@@ -44,7 +45,7 @@ export const Button = styled.button`
     padding: 0 5px;
     border: none;
     border-radius: 5px;
-    background-color: #64B83C;
+    background-color:#64B83C;
     font-weight: bold;
     font-size: 16px;
     color: white;
