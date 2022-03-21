@@ -107,11 +107,7 @@ export const InputArea = ({ onAdd }: Props) => {
 
         <C.InputLabel>
           <C.InputTitle>&nbsp;</C.InputTitle>
-          <C.Button onKeyPress={(event) => {
-    if (event.key === "Enter") {
-      handleAddEvent
-    }
-  }}>Agregar</C.Button>
+          <C.Button onClick={handleAddEvent}>Agregar</C.Button>
         </C.InputLabel>
       </C.Container>
   );
