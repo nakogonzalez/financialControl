@@ -1,19 +1,21 @@
 import * as C from './styles'
 import {Item} from '../../types/item'
 import {categories} from '../../data/categories';
-import {coin} from '../../data/coin';
+import {coins} from '../../data/coin';
 import {formatDate} from '../../helpers/dateFilter';
 
 
 type Props = {
     item: Item,
-    handleDeleteItem(deleteItem: string): void;
+    handleDeleteItem(deleteItem: number): void;
 }
 
 export const TableItem = ({item, handleDeleteItem}:Props) => {
 
     return (
       <C.TableLine>
+          <C.TableColumn>{item.id}</C.TableColumn>
+          
           <C.TableColumn>{formatDate(item.date)}</C.TableColumn>
 
           <C.TableColumn>
@@ -21,10 +23,10 @@ export const TableItem = ({item, handleDeleteItem}:Props) => {
               {categories[item.category].title}
               </C.Category>
           </C.TableColumn>
-
+        
           <C.TableColumn>
-              <C.Category color={coin[item.coin].color}>
-              {coin[item.coin].title}
+              <C.Category color={coins[item.coin].color}>
+              {coins[item.coin].title}
               </C.Category>
           </C.TableColumn>
           <C.TableColumn>
@@ -39,7 +41,7 @@ export const TableItem = ({item, handleDeleteItem}:Props) => {
               </C.Value>
           </C.TableColumn>
           <C.TableColumn>
-             <C.Button onClick={() => handleDeleteItem(item.coin)}>Eliminar</C.Button>
+             <C.Button onClick={() => handleDeleteItem(item.id)}>Eliminar</C.Button>
           </C.TableColumn>
       </C.TableLine>  
     );

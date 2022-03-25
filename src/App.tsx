@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import * as C from './App.styles';
+import logoFina from './assets/financiera.png'
+import logo from './assets/exchange house.png'
 
 import {Item} from './types/item';
 import { categories } from './data/categories';
+import { coins } from './data/coin';
 import { items } from './data/item';
 
 import { getCurrentMonth, filterListByMonth } from './helpers/dateFilter';
@@ -17,6 +20,12 @@ const App = () => {
   const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
+  const [incomeDolar, setIncomeDolar] = useState(0);
+  const [expenseDolar, setExpenseDolar] = useState(0);
+  const [incomeEuro, setIncomeEuro] = useState(0);
+  const [expenseEuro, setExpenseEuro] = useState(0);
+  const [incomeReal, setIncomeReal] = useState(0);
+  const [expenseReal, setExpenseReal] = useState(0);
   
 
   // Filtrar lista por mes
@@ -27,26 +36,50 @@ const App = () => {
 
   // Calculo de Entrada y Salida en el valor de la lista
   useEffect(()=> {
-    let incomeCount = 0;
-    let expenseCount = 0;
+    let incomePesos = 0;
+    let expensePesos = 0;
+    let incomeDolar = 0;
+    let expenseDolar = 0;
+    let incomeEuro = 0;
+    let expenseEuro = 0;
+    let incomeReal = 0;
+    let expenseReal = 0;
 
     for (let i in filteredList) {
       if (categories[filteredList[i].category].expense) {
-        if(filteredList[i].valueCurrency >=1) {
-          expenseCount += (filteredList[i].value * filteredList[i].valueCurrency);
-        }else {
-          expenseCount += filteredList[i].value;
+        if(coins[filteredList[i].coin].title == 'Dolar') {
+          incomePesos += (filteredList[i].value * filteredList[i].valueCurrency);
+          expenseDolar+= filteredList[i].value;
+        }else if(coins[filteredList[i].coin].title == 'Euro') {
+          incomePesos += (filteredList[i].value * filteredList[i].valueCurrency);
+          expenseEuro += filteredList[i].value;
+        }else if(coins[filteredList[i].coin].title == 'Reales') {
+          incomePesos += (filteredList[i].value * filteredList[i].valueCurrency);
+          expenseReal += filteredList[i].value;
         }
-      } else {
-        if(filteredList[i].valueCurrency >=1){
-          incomeCount += (filteredList[i].value * filteredList[i].valueCurrency);
-        }else {
-          incomeCount += filteredList[i].value;
-        }
+      }else {
+        if(coins[filteredList[i].coin].title == 'Pesos'){
+          incomePesos += filteredList[i].value;
+        } else if (coins[filteredList[i].coin].title == 'Dolar'){
+           expensePesos += (filteredList[i].value * filteredList[i].valueCurrency);
+           incomeDolar += filteredList[i].value;
+        }else if (coins[filteredList[i].coin].title == 'Euro'){
+          expensePesos += (filteredList[i].value * filteredList[i].valueCurrency);
+          incomeEuro += filteredList[i].value;
+       }else if (coins[filteredList[i].coin].title == 'Reales'){
+        expensePesos += (filteredList[i].value * filteredList[i].valueCurrency);
+        incomeReal += filteredList[i].value;
+     }
       }
     }
-    setIncome(incomeCount);
-    setExpense(expenseCount);
+    setExpenseEuro(expenseEuro)
+    setIncomeEuro(incomeEuro)
+    setExpenseReal(expenseReal)
+    setIncomeReal(incomeReal)
+    setExpenseDolar(expenseDolar)
+    setIncomeDolar(incomeDolar)
+    setIncome(incomePesos);
+    setExpense(expensePesos);
   }, [filteredList]);
 
 
@@ -55,9 +88,9 @@ const App = () => {
     setList([...list, item]);
   }  
 
-  const handleDeleteItem = (deleteItem: string) => {
+  const handleDeleteItem = (deleteItem: number) => {
     setList(list.filter((item)=> {
-      return item.coin != deleteItem
+      return item.id != deleteItem
     }))
   }
 
@@ -65,7 +98,9 @@ const App = () => {
   return (
     <C.Container>
       <C.Header>
-        <C.HeaderText>Beto Financiera</C.HeaderText>
+        <C.Img src={logoFina}></C.Img>
+        <C.HeaderText>Financiera</C.HeaderText>
+        <C.Img src={logo}></C.Img>
       </C.Header>
       <C.Body>
 
@@ -74,6 +109,13 @@ const App = () => {
       <InfoArea
       income={income}
       expense={expense}
+      expenseDolar={expenseDolar}
+      incomeDolar={incomeDolar}
+      expenseEuro={expenseEuro}
+      incomeEuro={incomeEuro}
+      expenseReal={expenseReal}
+      incomeReal={incomeReal}
+
       />
 
       

@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     flex: 1;
+    display:flex;
 `;
 
 export const Title = styled.div`
@@ -12,6 +13,7 @@ export const Title = styled.div`
 `;
 
 export const Info = styled.div<{color?: string}>`
+    margin-left:10px;
     text-align: center;
     font-weight: bold;
     color: ${props => props.color ?? 'black'};

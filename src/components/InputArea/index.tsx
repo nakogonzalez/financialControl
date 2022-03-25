@@ -3,7 +3,7 @@ import * as C from './styles';
 
 import { Item } from '../../types/item';
 import { categories } from '../../data/categories';
-import { coin } from '../../data/coin';
+import { coins } from '../../data/coin';
 
 type Props = {
   onAdd: (item: Item) => void;
@@ -15,10 +15,10 @@ export const InputArea = ({ onAdd }: Props) => {
   const [coinField, setCoinField] = useState('');
   const [valueCurrencyField, setValueCurrencyField] = useState(0);
   const [valueField, setValueField] = useState(0);
-
+  let [valueId, setId] = useState(1);
+  
   let categoryKeys: string[] = Object.keys(categories);
-  let coinKeys: string[] = Object.keys(coin);
-
+  let coinKeys: string[] = Object.keys(coins);
 
   const handleAddEvent = () => {
     let errors: string[] = [];
@@ -44,13 +44,17 @@ export const InputArea = ({ onAdd }: Props) => {
       alert(errors.join("\n"));
     } else {
       // Si no hay errores Agregar campos a la Lista, funcion onAdd por parametro
-      onAdd({
-        date: new Date(dateField),
-        category: categoryField,
-        coin: coinField,
-        valueCurrency:valueCurrencyField,
-        value: valueField
-      });
+        onAdd({
+          id:valueId++,
+          date: new Date(dateField),
+          category: categoryField,
+          coin: coinField,
+          valueCurrency:valueCurrencyField,
+          value: valueField
+        });
+
+        setId(valueId)
+      
       clearFields();
     }
   }
@@ -89,15 +93,15 @@ export const InputArea = ({ onAdd }: Props) => {
             <>
               <option></option> 
               {coinKeys.map((key, index) => (
-                <option key={index} value={key}>{coin[key].title}</option>
+                <option key={index} value={key}>{coins[key].title}</option>
               ))}
             </>
           </C.Select>
         </C.InputLabel>
 
          <C.InputLabel>
-          {coinField !== '' && coinField !== 'pesos' && <C.InputTitle>Valor Moneda $</C.InputTitle>}
-          {coinField !== '' && coinField !== 'pesos' && <C.Input type="number" value={valueCurrencyField} onChange={e => setValueCurrencyField(parseFloat(e.target.value))} /> }
+          {categoryField !== '' && categoryField !== 'entradaInicial' && <C.InputTitle>Valor Pesos $</C.InputTitle>}
+          {categoryField !== '' && categoryField !== 'entradaInicial' && <C.Input type="number" value={valueCurrencyField} onChange={e => setValueCurrencyField(parseFloat(e.target.value))} /> }
         </C.InputLabel>
 
         <C.InputLabel> 
