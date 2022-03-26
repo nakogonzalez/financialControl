@@ -103,36 +103,33 @@ const App = () => {
         <C.Img src={logo}></C.Img>
       </C.Header>
       <C.Body>
+        {/* Área de informacion */}
+        <C.BlockInfo>
+          <InfoArea
+          income={income}
+          expense={expense}
+          expenseDolar={expenseDolar}
+          incomeDolar={incomeDolar}
+          expenseEuro={expenseEuro}
+          incomeEuro={incomeEuro}
+          expenseReal={expenseReal}
+          incomeReal={incomeReal}
 
-
-      {/* Área de informacion */}
-      <InfoArea
-      income={income}
-      expense={expense}
-      expenseDolar={expenseDolar}
-      incomeDolar={incomeDolar}
-      expenseEuro={expenseEuro}
-      incomeEuro={incomeEuro}
-      expenseReal={expenseReal}
-      incomeReal={incomeReal}
-
-      />
-
+          />
+        </C.BlockInfo>
       
-      {/* Insertar Informacion */}
-      <InputArea 
-        onAdd={handleAddItem}
-      />
+        <C.BlockArea>
+            {/* Insertar Informacion */}
+          <InputArea 
+            onAdd={handleAddItem}
+          />
+          {/* Tabla de items */}
+          <TableArea 
+            list={filteredList}
+            handleDeleteItem={handleDeleteItem}
+          />
 
-
-        
-      {/* Tabla de items */}
-      <TableArea 
-        list={filteredList}
-        handleDeleteItem={handleDeleteItem}
-      />
-
-
+        </C.BlockArea>
       </C.Body>
     </C.Container>
   );

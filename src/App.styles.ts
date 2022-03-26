@@ -4,6 +4,17 @@ export const Container = styled.div`
     
 `;
 
+export const BlockInfo = styled.div`
+    padding: 0 10px 0 30px;
+
+`;
+
+export const BlockArea = styled.div`
+    padding: 0 30px 0 10px;
+    min-width: 1000px;
+`;
+
+
 export const Img = styled.img`
     width: 60px;
     height: 60px;
@@ -26,7 +37,8 @@ export const HeaderText = styled.h1`
 `;
 
 export const Body = styled.div`
-    margin: auto;
-    max-width: 980px;
+    margin: 0 auto;
     margin-bottom: 50px;
+    display:flex;
+    justify-content:center;
 `;
