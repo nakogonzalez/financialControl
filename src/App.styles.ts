@@ -23,7 +23,7 @@ export const Img = styled.img`
 
 export const Header = styled.div`
     background-color: #111;
-    height: 130px;
+    height: 100px;
     text-align: center;
     display: flex;
     justify-content: center;
