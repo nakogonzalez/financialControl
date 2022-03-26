@@ -36,7 +36,7 @@ export const TableItem = ({item, handleDeleteItem}:Props) => {
                  {item.valueCurrency != 0 ? `$ ${item.value}` : null}
           </C.TableColumn> 
           <C.TableColumn>
-              <C.Value color={categories[item.category].expense ? 'red' : 'limegreen'}>
+              <C.Value color={categories[item.category].expense ? 'limegreen' : 'red'}>
                 $ {item.valueCurrency > 0 ? item.value * item.valueCurrency : item.value + item.valueCurrency}
               </C.Value>
           </C.TableColumn>

@@ -18,6 +18,10 @@ const App = () => {
   const [list, setList] = useState(items);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
   const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
+  const [inicialIncome, setInicialIncome] = useState(0);
+  const [inicialDolar, setInicialDolar] = useState(0);
+  const [inicialEuro, setInicialEuro] = useState(0);
+  const [inicialReal, setInicialReal] = useState(0);
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [incomeDolar, setIncomeDolar] = useState(0);
@@ -36,6 +40,10 @@ const App = () => {
 
   // Calculo de Entrada y Salida en el valor de la lista
   useEffect(()=> {
+    let incomeIncial = 0;
+    let inicialDolar = 0;
+    let inicialEuro = 0;
+    let inicialReal = 0;
     let incomePesos = 0;
     let expensePesos = 0;
     let incomeDolar = 0;
@@ -46,32 +54,56 @@ const App = () => {
     let expenseReal = 0;
 
     for (let i in filteredList) {
-      if (categories[filteredList[i].category].expense) {
+      if (categories[filteredList[i].category].title == 'Entrada Incial') {
+        if(coins[filteredList[i].coin].title == 'Pesos'){
+          incomeIncial += filteredList[i].value;
+        } else if(coins[filteredList[i].coin].title == 'Dolar'){
+          inicialDolar += filteredList[i].value;
+        } else if(coins[filteredList[i].coin].title == 'Euro'){
+          inicialEuro += filteredList[i].value;
+        } else if(coins[filteredList[i].coin].title == 'Reales'){
+          inicialReal += filteredList[i].value;
+        }
+      }else if (categories[filteredList[i].category].title == 'Venta') {
         if(coins[filteredList[i].coin].title == 'Dolar') {
           incomePesos += (filteredList[i].value * filteredList[i].valueCurrency);
-          expenseDolar+= filteredList[i].value;
+          expenseDolar += filteredList[i].value;
+          inicialDolar -= filteredList[i].value;
+          incomeIncial += (filteredList[i].value * filteredList[i].valueCurrency);
         }else if(coins[filteredList[i].coin].title == 'Euro') {
           incomePesos += (filteredList[i].value * filteredList[i].valueCurrency);
           expenseEuro += filteredList[i].value;
+          inicialEuro -= filteredList[i].value;
+          incomeIncial += (filteredList[i].value * filteredList[i].valueCurrency);
         }else if(coins[filteredList[i].coin].title == 'Reales') {
           incomePesos += (filteredList[i].value * filteredList[i].valueCurrency);
           expenseReal += filteredList[i].value;
+          inicialReal -= filteredList[i].value;
+          incomeIncial += (filteredList[i].value * filteredList[i].valueCurrency);
         }
-      }else {
-        if(coins[filteredList[i].coin].title == 'Pesos'){
-          incomePesos += filteredList[i].value;
-        } else if (coins[filteredList[i].coin].title == 'Dolar'){
+      }else if(categories[filteredList[i].category].title == 'Compra') {
+         if (coins[filteredList[i].coin].title == 'Dolar'){
            expensePesos += (filteredList[i].value * filteredList[i].valueCurrency);
            incomeDolar += filteredList[i].value;
+           inicialDolar += filteredList[i].value;
+           incomeIncial -= (filteredList[i].value * filteredList[i].valueCurrency);
         }else if (coins[filteredList[i].coin].title == 'Euro'){
           expensePesos += (filteredList[i].value * filteredList[i].valueCurrency);
           incomeEuro += filteredList[i].value;
+          inicialEuro += filteredList[i].value;
+           incomeIncial -= (filteredList[i].value * filteredList[i].valueCurrency);
        }else if (coins[filteredList[i].coin].title == 'Reales'){
         expensePesos += (filteredList[i].value * filteredList[i].valueCurrency);
         incomeReal += filteredList[i].value;
+        inicialEuro += filteredList[i].value;
+        incomeIncial -= (filteredList[i].value * filteredList[i].valueCurrency);
      }
       }
     }
+    setInicialDolar(inicialDolar)
+    setInicialEuro(inicialEuro)
+    setInicialReal(inicialReal)
+    setInicialIncome(incomeIncial)
     setExpenseEuro(expenseEuro)
     setIncomeEuro(incomeEuro)
     setExpenseReal(expenseReal)
@@ -106,6 +138,10 @@ const App = () => {
         {/* Área de informacion */}
         <C.BlockInfo>
           <InfoArea
+          inicialIncome={inicialIncome}
+          inicialDolar={inicialDolar}
+          inicialEuro={inicialEuro}
+          inicialReal={inicialReal}
           income={income}
           expense={expense}
           expenseDolar={expenseDolar}
