@@ -13,6 +13,7 @@ const app = express()
 const PORT = process.env.PORT || 3001
 
 app.use(express.json())
+
 app.use(
     cors({
         origin: ["http://localhost:3000"],
@@ -85,7 +86,7 @@ app.post('/', (req, res) => {
             if(err) {
                 res.send({err: err})
             }
-            if (result.length > 0) {
+            if(result.length > 0) {
                 const id = result[0].id
                 const token = jwt.sign({id}, 'jwtSecret', {
                   expiresIn: 300,
