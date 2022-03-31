@@ -4,7 +4,6 @@
   "main": "index.html",
   "scripts": {
     "dev": "vite",
-    "vercel-build": "npm run build",
     "build": "vite build",
     "serve": "vite preview"
   },

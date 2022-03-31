@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken')
 
 const app = express()
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3500
 
 app.use(express.json())
 app.use(
@@ -103,3 +103,5 @@ app.post('/', (req, res) => {
 app.listen(process.env.PORT || PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+
+module.exports = app
