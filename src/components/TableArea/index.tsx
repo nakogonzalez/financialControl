@@ -17,6 +17,7 @@ export const TableArea = ({list, handleDeleteItem}: Props) => {
                 <tr>
                     <C.TableHeadColumn width={50}>#</C.TableHeadColumn>
                     <C.TableHeadColumn width={100}>Fecha</C.TableHeadColumn>
+                    <C.TableHeadColumn width={100}>Nombre</C.TableHeadColumn>
                     <C.TableHeadColumn width={130}>Categoria</C.TableHeadColumn>
                     <C.TableHeadColumn width={130}>Moneda</C.TableHeadColumn>
                     <C.TableHeadColumn width={150}>Valor Pesos $</C.TableHeadColumn>

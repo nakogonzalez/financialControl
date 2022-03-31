@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import * as C from './styles';
 
 import { Item } from '../../types/item';
@@ -15,6 +15,7 @@ export const InputArea = ({ onAdd }: Props) => {
   const [coinField, setCoinField] = useState('');
   const [valueCurrencyField, setValueCurrencyField] = useState(0);
   const [valueField, setValueField] = useState(0);
+  const [nameField, setNameField] = useState('')
   let [valueId, setId] = useState(1);
   
   let categoryKeys: string[] = Object.keys(categories);
@@ -47,6 +48,7 @@ export const InputArea = ({ onAdd }: Props) => {
         onAdd({
           id:valueId++,
           date: new Date(dateField),
+          name: nameField,
           category: categoryField,
           coin: coinField,
           valueCurrency:valueCurrencyField,
@@ -73,6 +75,11 @@ export const InputArea = ({ onAdd }: Props) => {
         <C.InputLabel>
           <C.InputTitle>Fecha</C.InputTitle>
           <C.Input type="date" value={dateField} onChange={e => setDateField(e.target.value)} />
+        </C.InputLabel>
+
+        <C.InputLabel>
+          <C.InputTitle>Nombre</C.InputTitle>
+          <C.Input type="name" value={nameField} onChange={e => setNameField(e.target.value)} />
         </C.InputLabel>
 
         <C.InputLabel>

@@ -1,7 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
-    
 `;
 
 export const BlockInfo = styled.div`
@@ -20,6 +19,25 @@ export const Img = styled.img`
     height: 60px;
     padding-top: 20px;
 `
+
+export const Button = styled.button`
+    padding: 5px 20px;
+    position:absolute;
+    right: 40px;
+    top: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: red;
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+    &:hover {
+        background-color: red;
+
+    }
+`;
 
 export const Header = styled.div`
     background-color: #111;

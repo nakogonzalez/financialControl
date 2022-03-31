@@ -16,6 +16,7 @@ type Props = {
     incomeReal: number;
 }
 
+
 export const InfoArea = ({income, expense, expenseDolar, incomeDolar, expenseEuro, incomeEuro, expenseReal, incomeReal, inicialIncome, inicialDolar, inicialEuro, inicialReal}: Props) => {
 
 

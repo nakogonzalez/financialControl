@@ -17,6 +17,8 @@ export const TableItem = ({item, handleDeleteItem}:Props) => {
           <C.TableColumn>{item.id}</C.TableColumn>
           
           <C.TableColumn>{formatDate(item.date)}</C.TableColumn>
+          
+          <C.TableColumn>{item.name}</C.TableColumn>
 
           <C.TableColumn>
               <C.Category color={categories[item.category].color}>
