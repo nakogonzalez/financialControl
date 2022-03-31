@@ -6,8 +6,8 @@
     ],
     "routes": [
         {
-            "src": "(.*).ts",
-            "dest": "/$1.ts"            
+            "src": "(.*).js",
+            "dest": "/$1.js"            
         },
         {
             "src": "(.*).json",
