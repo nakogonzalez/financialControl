@@ -10,6 +10,8 @@ const jwt = require('jsonwebtoken')
 
 const app = express()
 
+const PORT = 3001;
+
 app.use(express.json())
 app.use(
     cors({
@@ -98,6 +100,6 @@ app.post('/', (req, res) => {
     )
 })
 
-app.listen(3001, () => {
-    console.log('running server')
+app.listen(process.env.PORT || PORT, () => {
+  console.log(`Server running on port ${PORT}`)
 })
