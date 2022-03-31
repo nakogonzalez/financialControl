@@ -10,7 +10,7 @@ const App = () => {
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/").then((response) => {
+    Axios.get("http://financiera-nako.vercel.app/").then((response) => {
       if (response.data.loggedIn === true) {
         setLoggedIn(response.data.user[0]);
       }
