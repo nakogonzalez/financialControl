@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr api/index.js --outDir dist/server"
   },
   "dependencies": {
     "axios": "^0.26.1",
