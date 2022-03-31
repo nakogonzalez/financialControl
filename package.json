@@ -1,10 +1,11 @@
 {
   "name": "finance",
   "version": "0.0.0",
+  "main": "index.html",
   "scripts": {
     "dev": "vite",
-    "build:client": "vite build --outDir dist/client",
-    "build:server": "vite build --ssr api/index.js --outDir dist/server"
+    "build": "vite build",
+    "serve": "npm run build && vite preview"
   },
   "dependencies": {
     "axios": "^0.26.1",
