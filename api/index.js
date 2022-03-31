@@ -9,6 +9,7 @@ const session = require("express-session");
 const jwt = require('jsonwebtoken')
 
 const app = express()
+const PORT = process.env.PORT || 3001
 
 app.use(express.json())
 app.use(
@@ -98,6 +99,8 @@ app.post('/', (req, res) => {
     )
 })
 
-app.listen(3001, () => {
-    console.log('running server')
-})
+if (!process.env.NOW_REGION) {
+  app.listen(PORT, () => {
+    console.log(`Listening at http://localhost:${PORT}/`)
+  })
+}
