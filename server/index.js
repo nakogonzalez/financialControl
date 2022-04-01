@@ -10,6 +10,8 @@ const jwt = require('jsonwebtoken')
 
 const app = express()
 
+const PORT = process.env.PORT || 3001
+
 app.use(express.json())
 app.use(
     cors({
@@ -35,12 +37,11 @@ app.use(
 );
 
 const db = mysql.createConnection({
-    user: 'root',
-    host: 'localhost',
-    password: 'password',
-    database: 'LoginSystem'
+    user: 'b7d2b03308013f',
+    host: 'us-cdbr-east-05.cleardb.net',
+    password: '23e5efaa',
+    database: 'heroku_86ff072394cdc7c'
 })
-
 
 app.get('/', (req, res) => {
     if (req.session.user) {
@@ -99,6 +100,6 @@ app.post('/', (req,res) => {
     )
 })
 
-app.listen(3001,() => {
-    console.log("Running server")
+app.listen(PORT,() => {
+    console.log(`Running server on ${PORT}`)
 })
