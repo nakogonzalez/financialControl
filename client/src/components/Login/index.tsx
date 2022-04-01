@@ -16,6 +16,7 @@ export const Login = () => {
         if (response.data.auth) {
           localStorage.setItem('token', response.data.token)
         }
+        console.log(response.data.token)
       })
     }
 

@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
 `;
 
+export const Form = styled.form`
+`;
+
+
 export const BlockInfo = styled.div`
     padding: 0 10px 0 30px;
 

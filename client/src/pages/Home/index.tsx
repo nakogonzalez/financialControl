@@ -3,6 +3,8 @@ import * as C from './styles';
 import logoFina from '../../assets/financiera.png'
 import logo from '../../assets/exchange house.png'
 
+import Axios from 'axios'
+
 import {Item} from '../../types/item';
 import { categories } from '../../data/categories';
 import { coins } from '../../data/coin';
@@ -14,9 +16,11 @@ import { TableArea } from '../../components/TableArea';
 import { InfoArea } from '../../components/InfoArea';
 import { InputArea } from '../../components/InputArea';
 
+type Props = {
+  handleLogout: () => void;
+}
 
-
-export const HomePage = () => {
+export const HomePage = ({handleLogout}: Props) => {
 
   const [list, setList] = useState(items);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
@@ -132,9 +136,10 @@ export const HomePage = () => {
     return 'Texto de aviso';
   };
 
-  const handleLogout = () => {
-    
-  }
+
+  
+
+ 
   return (
     <C.Container>
       <C.Header>

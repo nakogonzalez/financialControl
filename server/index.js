@@ -10,10 +10,7 @@ const jwt = require('jsonwebtoken')
 
 const app = express()
 
-const PORT = process.env.PORT || 3001
-
 app.use(express.json())
-
 app.use(
     cors({
         origin: ["http://localhost:3000"],
@@ -35,14 +32,15 @@ app.use(
         expires: 60 * 60 * 24,
       },
     })
-  );
+);
 
 const db = mysql.createConnection({
     user: 'root',
     host: 'localhost',
     password: 'password',
-    database: 'Login'
+    database: 'LoginSystem'
 })
+
 
 app.get('/', (req, res) => {
     if (req.session.user) {
@@ -53,54 +51,54 @@ app.get('/', (req, res) => {
   });
 
 const verifyJWT = (req, res, next) => {
-  const token = req.headers['x-access-token']
-
-  if(!token) {
-    res.send('Yo, we need a token')
-  } else {
-    jwt.verify(token, 'jwtSecret', (err, decoded) => {
-      if (err) {
-        res.json({auth: false, message: 'You failed to Auth'})
-      } else {
-        req.userId = decoded.id
-        next()
-      }
-    })
+    const token = req.headers['x-access-token']
+  
+    if(!token) {
+      res.send('Yo, we need a token')
+    } else {
+      jwt.verify(token, 'jwtSecret', (err, decoded) => {
+        if (err) {
+          res.json({auth: false, message: 'You failed to Auth'})
+        } else {
+          req.userId = decoded.id
+          next()
+        }
+      })
+    }
   }
-}
+  
+  app.get('/isUserAuth', verifyJWT, (req, res) => {
+    res.send('You are Auth Congrats!')
+  })
 
-app.get('/isUserAuth', verifyJWT, (req, res) => {
-  res.send('You are Auth Congrats!')
-})
-
-
-
-app.post('/', (req, res) => {
+  
+app.post('/', (req,res) => {
     const username = req.body.username
     const password = req.body.password
 
     db.query(
         "SELECT * FROM users WHERE username = ? AND password = ?",
-        [username, password],
+        [username,password],
         (err, result) => {
             if(err) {
-                res.send({err: err})
-            }
-            if(result.length > 0) {
-                const id = result[0].id
-                const token = jwt.sign({id}, 'jwtSecret', {
-                  expiresIn: 300,
-                })
-                req.session.user = result;
-                
-                res.json({auth: true, token: token, result: result}); 
+                res.send({err})
             } else {
-              res.json({auth: false, message: 'El usuario/contraseña no existe'}); 
+                if(result.length > 0) {
+                    const id = result[0].id
+                    const token = jwt.sign({id}, 'jwtSecret', {
+                      expiresIn: 300,
+                    })
+                    req.session.user = result;
+                    
+                    res.json({auth: true, token: token, result: result}); 
+                } else {
+                  res.json({auth: false, message: 'El usuario/contraseña no existe'}); 
+                }
             }
         }
     )
 })
 
-app.listen(process.env.PORT || PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+app.listen(3001,() => {
+    console.log("Running server")
 })
