@@ -10,7 +10,7 @@ const App = () => {
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/").then((response) => {
+    Axios.get("https://financiera-back.herokuapp.com/").then((response) => {
       if (response.data.loggedIn === true ) {
         setLoggedIn(true);
       } 
