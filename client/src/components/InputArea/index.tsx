@@ -21,7 +21,8 @@ export const InputArea = ({ onAdd }: Props) => {
   let categoryKeys: string[] = Object.keys(categories);
   let coinKeys: string[] = Object.keys(coins);
 
-  const handleAddEvent = () => {
+  const handleAddEvent = (e: { preventDefault: () => void; }) => {
+    e.preventDefault()
     let errors: string[] = [];
 
     // Condicional de errores

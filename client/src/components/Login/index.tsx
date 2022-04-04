@@ -8,6 +8,8 @@ export const Login = () => {
 
     Axios.defaults.withCredentials = true;
     
+    // http://localhost:3001/ && https://financiera-back.herokuapp.com/
+
     const handdleLogin = () => {
       Axios.post('https://financiera-back.herokuapp.com/', {
         username: username,

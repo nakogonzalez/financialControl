@@ -16,11 +16,7 @@ import { TableArea } from '../../components/TableArea';
 import { InfoArea } from '../../components/InfoArea';
 import { InputArea } from '../../components/InputArea';
 
-type Props = {
-  handleLogout: () => void;
-}
-
-export const HomePage = ({handleLogout}: Props) => {
+export const HomePage = () => {
 
   const [list, setList] = useState(items);
   const [filteredList, setFilteredList] = useState<Item[]>([]);
@@ -146,7 +142,7 @@ export const HomePage = ({handleLogout}: Props) => {
         <C.Img src={logoFina}></C.Img>
         <C.HeaderText>Financiera</C.HeaderText>
         <C.Img src={logo}></C.Img>
-        <C.Button onClick={handleLogout}>Log Out</C.Button>
+        <C.Button>Log Out</C.Button>
       </C.Header>
       <C.Body>
         {/* Área de informacion */}

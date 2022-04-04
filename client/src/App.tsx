@@ -9,22 +9,21 @@ const App = () => {
 
   Axios.defaults.withCredentials = true;
 
+   // http://localhost:3001/ && https://financiera-back.herokuapp.com/
+   
   useEffect(() => {
-    Axios.get("https://financiera-back.herokuapp.com/").then((response) => {
+    Axios.get("https://financiera-back.herokuapp.com/ ").then((response) => {
       if (response.data.loggedIn === true ) {
         setLoggedIn(true);
       } 
+      console.log(response.data.loggedIn)
     });
   }, []);
-
-  const handleLogout = () => {
-        setLoggedIn(false);
-   }
 
   return (
     <Routes>
      {!loggedIn ? <Route path='/' element={<Login />} /> : <Route path='/' element={<Navigate replace to="/home" />} /> }
-     {loggedIn  ? <Route path='/home' element={<HomePage handleLogout={handleLogout} />} /> :  <Route path='/home' element={<Navigate replace to="/" />} />}
+     {loggedIn  ? <Route path='/home' element={<HomePage />} /> :  <Route path='/home' element={<Navigate replace to="/" />} />}
     </Routes>
   )
 }
