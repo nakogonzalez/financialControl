@@ -12,7 +12,7 @@ const App = () => {
    // http://localhost:3001/ && https://financiera-back.herokuapp.com/
    
   useEffect(() => {
-    Axios.get("https://financiera-back.herokuapp.com/ ").then((response) => {
+    Axios.get("http://localhost:3001/").then((response) => {
       if (response.data.loggedIn === true ) {
         setLoggedIn(true);
       } 

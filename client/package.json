@@ -2,10 +2,9 @@
   "name": "finance",
   "version": "0.0.0",
   "scripts": {
-    "start":"react-scripts start",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "npm run build && vite preview"
   },
   "dependencies": {
     "axios": "^0.26.1",
